@@ -1,0 +1,19 @@
+{{ 'component-free-delivery-calculator.css' | asset_url | stylesheet_tag }}
+
+<div class="delivery">
+  <div class="delivery__container">
+    <div class="delivery__icon">
+      Icon
+    </div>
+    <div class="delivery__text">
+      {% if cart.total_price < settings.free_delivery_threshold %}
+        Spend (X) more for free delivery
+      {% else %}
+        Free delivery threshold met.
+      {% endif %}
+    </div>
+  </div>
+  <div class="delivery__threshold">
+    <div class="delivery__threshold--inner"></div>
+  </div>
+</div>

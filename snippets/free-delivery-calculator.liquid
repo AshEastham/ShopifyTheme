@@ -20,7 +20,7 @@
   comment
     'Delivery threshold reformatted to use in the if statement below'
   endcomment
-  assign deliveryThreshold = deliveryThreshold | money_without_trailing_zeros
+  assign deliveryThreshold = deliveryThreshold | money_without_trailing_zeros | replace: '£', ''
 %}
 
 {% if cartTotal >= deliveryThreshold %}

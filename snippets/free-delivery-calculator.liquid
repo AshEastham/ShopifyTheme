@@ -1,19 +1,48 @@
 {{ 'component-free-delivery-calculator.css' | asset_url | stylesheet_tag }}
 
+{% liquid 
+  comment 
+    'Logic for delivery difference'
+  endcomment
+  assign deliveryThreshold = settings.free_delivery_threshold | money_without_trailing_zeros | replace: '£', '' | plus: 0 | times: 100.00
+  assign cartTotal = cart.total_price | plus: 0
+  assign deliveryDifference = deliveryThreshold | minus: cartTotal | money
+
+  comment
+    'Reformatting variable logic so bar percentage difference can be calculated and assigned.'
+  endcomment
+  assign cartTotal = cartTotal | money_without_trailing_zeros | replace: '£', ''
+  assign barDifference = cartTotal | divided_by: deliveryThreshold | times: 10000
+  if barDifference >= cartTotal
+    assign barDifference = 100
+  endif
+
+  comment
+    'Delivery threshold reformatted to use in the if statement below'
+  endcomment
+  assign deliveryThreshold = deliveryThreshold | money_without_trailing_zeros
+%}
+
+{% if cartTotal >= deliveryThreshold %}
+  {% capture thresholdText %}
+    {{ settings.delivery_standard_messaging }}
+  {% endcapture %}
+{% else %}
+  {% capture thresholdText %}
+    {{ settings.delivery_amount_messaging | replace: "[amount]", deliveryDifference }}
+  {% endcapture %}
+{% endif %}
+
 <div class="delivery">
   <div class="delivery__container">
     <div class="delivery__icon">
-      Icon
+      {% render 'free-delivery-icon' with 'delivery' %}
     </div>
     <div class="delivery__text">
-      {% if cart.total_price < settings.free_delivery_threshold %}
-        Spend (X) more for free delivery
-      {% else %}
-        Free delivery threshold met.
-      {% endif %}
+      {{ thresholdText }}
     </div>
   </div>
   <div class="delivery__threshold">
-    <div class="delivery__threshold--inner"></div>
+    <div class="delivery__threshold--inner" style="width: {{ barDifference }}%;"><span></span></div>
   </div>
 </div>

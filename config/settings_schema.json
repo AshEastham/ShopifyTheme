@@ -348,5 +348,28 @@
         "default": true
       }
     ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "number",
+        "id": "free_delivery_threshold",
+        "label": "Free Delivery Threshold",
+        "default": 12500
+      },
+      {
+        "type": "text",
+        "id": "delivery_amount_messaging",
+        "label": "Delivery Amount Messaging",
+        "default": "Spend [amount] more for free delivery"
+      },
+      {
+        "type": "text",
+        "id": "delivery_standard_messaging",
+        "label": "Delivery Threshold Met Messaging",
+        "default": "You have qualified for free delivery"
+      }
+    ]
   }
 ]

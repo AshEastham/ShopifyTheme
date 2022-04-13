@@ -1,0 +1,40 @@
+.delivery {
+  display: flex;
+  flex-direction: column;
+  background-color: #d4f7f6;
+  padding: 1rem 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.delivery__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 3px 0;
+}
+
+.totals {
+  border-top: solid 1px rgba(0,0,0,0.3);
+  padding-top: 0.7em;
+}
+
+.delivery__threshold {
+  width: 100%;
+  height: 20px;
+  border-radius: 18px;
+  background-color: #dadada;
+  overflow: hidden;
+}
+
+.delivery__threshold--inner {
+  background-color: #808080;
+  height: 20px;
+  border-radius: 18px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.delivery__text {
+  margin-left: 10px;
+  font-size: 15px;
+}

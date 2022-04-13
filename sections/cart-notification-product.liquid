@@ -38,6 +38,9 @@
                 </div>
               {%- endif -%}
             {%- endfor -%}
+            <div class="product-option">
+              <dt>Qty:</dt><dd>{{ item.quantity }}</dd>
+            </div>
           </dl>
         {%- if item.selling_plan_allocation != nil -%}
           <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>

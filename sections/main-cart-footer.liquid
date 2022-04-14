@@ -19,7 +19,7 @@
             {%- when '@app' -%}
               {% render block %}
             {%- when 'free-delivery' -%}
-              {%- render 'free-delivery-calculator' -%}
+              {%- section 'free-delivery-calculator' -%}
             {%- when 'subtotal' -%}
               <div class="js-contents" {{ block.shopify_attributes }}>
                 <div class="totals">

@@ -11,7 +11,7 @@
   comment
     'Reformatting variable logic so bar percentage difference can be calculated and assigned.'
   endcomment
-  assign cartTotal = cartTotal | money_without_trailing_zeros | replace: '£', ''
+  assign cartTotal = cartTotal | money_without_trailing_zeros | replace: '£', '' | plus: 0
   assign barDifference = cartTotal | divided_by: deliveryThreshold | times: 10000
   if barDifference >= cartTotal
     assign barDifference = 100
@@ -20,18 +20,16 @@
   comment
     'Delivery threshold reformatted to use in the if statement below'
   endcomment
-  assign deliveryThreshold = deliveryThreshold | money_without_trailing_zeros | replace: '£', ''
+  assign deliveryThreshold = deliveryThreshold | money_without_trailing_zeros | replace: '£', '' | plus: 0
 %}
 
+{% capture thresholdText %}
 {% if cartTotal >= deliveryThreshold %}
-  {% capture thresholdText %}
-    {{ settings.delivery_standard_messaging }}
-  {% endcapture %}
+  {{ settings.delivery_standard_messaging }}
 {% else %}
-  {% capture thresholdText %}
-    {{ settings.delivery_amount_messaging | replace: "[amount]", deliveryDifference }}
-  {% endcapture %}
+  {{ settings.delivery_amount_messaging | replace: "[amount]", deliveryDifference }}
 {% endif %}
+{% endcapture %}
 
 <div class="delivery">
   <div class="delivery__container">

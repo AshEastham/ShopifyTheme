@@ -18,7 +18,7 @@
           {%- case block.type -%}
             {%- when '@app' -%}
               {% render block %}
-            {%- when 'free-delivery-calculator' -%}
+            {%- when 'free-delivery' -%}
               {%- render 'free-delivery-calculator' -%}
             {%- when 'subtotal' -%}
               <div class="js-contents" {{ block.shopify_attributes }}>
